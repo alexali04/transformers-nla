@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 from torch.linalg import qr
 
-from transformers_nla.nn.common import AttnConfig, Block, get_num_params
+from nn.common import AttnConfig, Block, get_num_params
 
 
 class RNLA(nn.Module):

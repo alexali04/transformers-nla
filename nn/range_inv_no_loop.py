@@ -1,7 +1,7 @@
 import torch
 import torch.nn as nn
 
-from transformers_nla.nn.common import POSENC, AttnConfig, Block, LayerNorm, get_num_params
+from nn.common import POSENC, AttnConfig, Block, LayerNorm, get_num_params
 
 
 class RangeInvNoLoopFormer(nn.Module):

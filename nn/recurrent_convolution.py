@@ -2,7 +2,7 @@ import numpy as np
 import torch
 import torch.nn as nn
 
-from transformers_nla.nn.common import RecurrentConvolutionConfig
+from nn.common import RecurrentConvolutionConfig
 
 
 class RecurrentConvolution(nn.Module):
