@@ -2,7 +2,7 @@ import functools as ft
 
 import numpy as np
 
-
+# Taken from MattMills49: https://gist.github.com/mattmills49/44a50b23d3c7a8f71dfadadd0f876ac2
 def display_hist(x, num_bins=8, zeros_as_blank=False):
     """Returns a histogram as a unicode text string, e.g. '▁▂▄█▆▃▁▁'
 
