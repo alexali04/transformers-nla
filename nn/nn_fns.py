@@ -3,9 +3,8 @@ from copy import deepcopy
 from types import SimpleNamespace
 
 import torch
-import torch.nn as nn
 
-import nn as tnn
+import nn
 
 
 def get_model_from_path(search_path: str):
@@ -24,21 +23,21 @@ def get_model_from_path(search_path: str):
 def get_model(args):
     config = _construct_config(args)
     try:
-        model = getattr(tnn, args.model)(config)
+        model = getattr(nn, args.model)(config)
     except AttributeError:
-        raise ValueError(f"Model {args.model} not found. Supported models: {tnn.supported_models}")
+        raise ValueError(f"Model {args.model} not found. Supported models: {nn.supported_models}")
     return model
 
 
 def _construct_config(args):
     if args.model == "RecurrentConvolution":
-        config = getattr(tnn, "RecurrentConvolutionConfig")(
+        config = getattr(nn, "RecurrentConvolutionConfig")(
             kernel_size=args.kernel_size,
             target_size=args.target_size,
             channel_count=args.channel_count,
         )
     else:
-        config = getattr(tnn, "AttnConfig")(
+        config = getattr(nn, "AttnConfig")(
             n_head=args.n_head,
             n_embd=args.n_embd,
             n_seq=args.n_seq,
@@ -113,7 +112,7 @@ def _setchainattr(obj, attr, value):
     setattr(obj, attributes[-1], value)
 
 
-class SubspaceModel(nn.Module):
+class SubspaceModel(torch.nn.Module):
     def __init__(self, net, target_dim: int = 32, seed=None, device=None):
         super().__init__()
 
@@ -131,7 +130,7 @@ class SubspaceModel(nn.Module):
         self.names = list(self.names)
 
         self.D = sum([param.numel() for param in self.trainable_initparams])
-        self.subspace_params = nn.Parameter(torch.zeros(self.d))
+        self.subspace_params = torch.nn.Parameter(torch.zeros(self.d))
         if seed is not None:
             torch.manual_seed(seed)
 
